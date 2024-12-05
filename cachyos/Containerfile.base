@@ -3,7 +3,7 @@
 # |
 
 # Build a clean system in /mnt to avoid missing files from NoExtract option in upstream
-FROM docker.io/library/archlinux AS rootfs
+FROM docker.io/library/archlinux/base-devel AS rootfs
 
 # Generate a GPG secret key for signing and import CachyOS keys
 RUN pacman-key --init && \
@@ -41,3 +41,8 @@ RUN echo "KEYMAP=${SYSTEM_OPT_KEYMAP}" > /etc/vconsole.conf
 RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     locale-gen
+
+# aur helper
+RUN /bin/sh -c git clone https://aur.archlinux.org/aura-bin.git && \
+    cd aura-bin && \
+    makepkg -irs --noconfirm

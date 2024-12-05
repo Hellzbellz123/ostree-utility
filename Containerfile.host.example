@@ -11,8 +11,8 @@ RUN mkdir -p /etc/mkinitcpio.conf.d && \
 
 # Install kernel, firmware, microcode, filesystem tools, bootloader & ostree and run hooks once:
 RUN pacman --noconfirm -S \
-    linux-cachyos-lto \
-    linux-cachyos-lto-headers \
+    linux-cachyos-bore-lto \
+    linux-cachyos-bore-lto-headers \
     linux-firmware \
     amd-ucode \
     \
@@ -24,7 +24,12 @@ RUN pacman --noconfirm -S \
     \
     podman \
     ostree \
-    which
+    which \
+    waybar \
+    hyprland \
+    dolphin \
+    lxappearance \
+    kitty \
 
 # OSTree: Prepare microcode and initramfs
 RUN moduledir=$(find /usr/lib/modules -mindepth 1 -maxdepth 1 -type d) && \
